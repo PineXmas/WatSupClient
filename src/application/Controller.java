@@ -43,7 +43,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
+  
 public class Controller {
 	String serverHost = "192.168.43.136";
 	int portNumber = 8312;
