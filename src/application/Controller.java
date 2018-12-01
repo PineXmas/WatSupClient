@@ -557,6 +557,10 @@ public class Controller {
 	 */
 	public void onBtnSignIn_Click(ActionEvent event) {
 		myUserName = txtUserName.getText();
+		if (myUserName.isEmpty()) {
+			displayErrorMsg("Username could not be empty");
+			return;
+		}
 
 		try {
 
@@ -704,6 +708,7 @@ public class Controller {
 	public void onBtnCreate_Click(ActionEvent event) {
 		String roomName = txtNewRoom.getText();
 		if (roomName.isEmpty()) {
+			displayErrorMsg("Room name could not be empty");
 			return;
 		}
 		
