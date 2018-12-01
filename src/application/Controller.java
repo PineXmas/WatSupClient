@@ -341,8 +341,8 @@ public class Controller {
 										displayErrorMsg("You have been kicked out");
 										
 										//TODO test when I receive KICKED_OUT
-//										reset();
-//										switch2LogIn();
+										reset();
+										switch2LogIn();
 
 									}
 								});
