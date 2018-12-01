@@ -5,22 +5,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="ChatRoom" prefHeight="582.0" prefWidth="632.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="ChatRoom" prefHeight="582.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="btnNewRoom" layoutX="14.0" layoutY="541.0" mnemonicParsing="false" onAction="#new_room" text="Create" />
       <TextField fx:id="txtNewRoom" layoutX="14.0" layoutY="501.0" prefHeight="27.0" prefWidth="172.0" />
       <Label fx:id="titlenewRoom" layoutX="28.0" layoutY="476.0" text="Add A New ChatRoom" />
       <Button fx:id="btnSendChat" layoutX="513.0" layoutY="488.0" mnemonicParsing="false" onAction="#onBtnSendChat_Click" prefHeight="27.0" prefWidth="74.0" text="Send" />
-      <TextArea fx:id="txtChatWindow" editable="false" layoutX="202.0" layoutY="65.0" prefHeight="403.0" prefWidth="268.0" />
+      <TextArea fx:id="txtChatWindow" editable="false" layoutX="202.0" layoutY="65.0" prefHeight="403.0" prefWidth="268.0" wrapText="true" />
       <TextArea fx:id="txtChat" layoutX="202.0" layoutY="475.0" prefHeight="93.0" prefWidth="268.0" />
       <ListView fx:id="listRooms" layoutX="7.0" layoutY="65.0" onMouseClicked="#onListRooms_Click" prefHeight="403.0" prefWidth="187.0" />
-      <TabPane fx:id="tabUserList" layoutX="476.0" layoutY="66.0" prefHeight="403.0" prefWidth="148.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPaneNameList" layoutX="476.0" layoutY="66.0" prefHeight="400.0" prefWidth="150.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="tabAll" text="All">
+          <Tab fx:id="tabAllUsers" text="All">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ListView fx:id="listAllUser" layoutX="2.0" onMouseClicked="#onListUser_Click" prefHeight="375.0" prefWidth="148.0" />
+                        <ListView fx:id="listAllUser" onMouseClicked="#onListUser_Click" prefHeight="400.0" prefWidth="150.0" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -28,7 +28,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ListView fx:id="listRoomUser" layoutX="5.0" prefHeight="369.0" prefWidth="142.0" />
+                        <ListView fx:id="listRoomUser" prefHeight="400.0" prefWidth="150.0" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -38,5 +38,6 @@
       <Button fx:id="btnLeaveRoom" layoutX="86.0" layoutY="541.0" mnemonicParsing="false" onAction="#onBtnLeaveRoom_Click" prefHeight="27.0" prefWidth="100.0" text="Leave Room" />
       <Label fx:id="lbChatWindow" layoutX="202.0" layoutY="34.0" prefHeight="27.0" prefWidth="93.0" text="Room" />
       <Label fx:id="lbChatRoom" layoutX="7.0" layoutY="34.0" prefHeight="27.0" prefWidth="93.0" text="Chat Room" />
+      <Button fx:id="btnLogOut" layoutX="513.0" layoutY="528.0" mnemonicParsing="false" onAction="#onBtnLogOut_Click" prefHeight="27.0" prefWidth="74.0" text="Log Out" />
    </children>
 </AnchorPane>

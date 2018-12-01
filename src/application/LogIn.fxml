@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="245.0" prefWidth="313.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+<AnchorPane prefHeight="245.0" prefWidth="313.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="btnSignIn" layoutX="106.0" layoutY="148.0" mnemonicParsing="false" onAction="#onBtnSignIn_Click" prefHeight="9.0" prefWidth="102.0" text="Sign In">
+      <Button fx:id="btnSignIn" layoutX="106.0" layoutY="173.0" mnemonicParsing="false" onAction="#onBtnSignIn_Click" prefHeight="9.0" prefWidth="102.0" text="Log In">
          <font>
             <Font name="Avenir Next Demi Bold" size="13.0" />
          </font>
@@ -21,10 +21,10 @@
                </stops>
             </LinearGradient>
          </textFill></Button>
-      <TextField fx:id="txtUserName" layoutX="78.0" layoutY="96.0" promptText="Enter Your Username" />
-      <Label layoutX="122.0" layoutY="32.0" text="WATSUP">
+      <TextField fx:id="txtUserName" layoutX="75.0" layoutY="135.0" prefHeight="25.0" prefWidth="163.0" promptText="Enter Your Username" />
+      <Label layoutX="92.0" layoutY="54.0" text="WATSUP">
          <font>
-            <Font name="Times New Roman Bold" size="18.0" />
+            <Font name="Times New Roman Bold" size="30.0" />
          </font>
          <textFill>
             <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0">
