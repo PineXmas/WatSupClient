@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="245.0" prefWidth="313.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <children>
+      <Button fx:id="btnSignIn" layoutX="106.0" layoutY="148.0" mnemonicParsing="false" onAction="#onBtnSignIn_Click" prefHeight="9.0" prefWidth="102.0" text="Sign In">
+         <font>
+            <Font name="Avenir Next Demi Bold" size="13.0" />
+         </font>
+         <textFill>
+            <LinearGradient cycleMethod="REPEAT" endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#1e1d09" />
+                  <Stop color="#1194ab" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill></Button>
+      <TextField fx:id="txtUserName" layoutX="78.0" layoutY="96.0" promptText="Enter Your Username" />
+      <Label layoutX="122.0" layoutY="32.0" text="WATSUP">
+         <font>
+            <Font name="Times New Roman Bold" size="18.0" />
+         </font>
+         <textFill>
+            <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#1e1d09" />
+                  <Stop color="#24cdeb" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+   </children>
+</AnchorPane>
