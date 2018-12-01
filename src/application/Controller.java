@@ -59,6 +59,7 @@ public class Controller {
 	public ArrayList<User> listUserData = new ArrayList<>(); // List of all users
 	public ArrayList<ChatRoom> listRoomData = new ArrayList<>(); // List chat room
 	public ArrayList<ChatRoom> listJoinedRoomNames = new ArrayList<>(); // List joined room
+	public ArrayList<PrivateChatRecord> listPrivateChat = new ArrayList<>();
 
 	//TODO myself should have a map <user-name, private-chat-content>. Also, every time I receive LIST_USERS_ALL, I go to my map to remove chat content accordingly
 	
@@ -314,10 +315,16 @@ public class Controller {
 						else if (msg.opcode == WSMCode.OPCODE_LIST_USERS_ALL) {
 							WSMListUsersAll msgListUserAll = (WSMListUsersAll) msg;
 							
-							//new code
 							listUserData.clear();
 							for (int i = 0; i < (msgListUserAll.arrUserNames.length); ++i) {
 								listUserData.add(new User(msgListUserAll.arrUserNames[i]));
+							}
+							
+							//check to remove private-chat-record from disconnected users
+							for (int j = listPrivateChat.size()-1; j >= 0; j--) {
+								if (searchUser(listPrivateChat.get(j).userName, listUserData) == -1) {
+									listPrivateChat.remove(j);
+								}
 							}
 
 							displayUI();
@@ -339,8 +346,6 @@ public class Controller {
 									public void run() {
 
 										displayErrorMsg("You have been kicked out");
-										
-										//TODO test when I receive KICKED_OUT
 										reset();
 										switch2LogIn();
 
@@ -376,6 +381,29 @@ public class Controller {
 
 							}
 
+							displayUI();
+						} else if (msg.opcode == WSMCode.OPCODE_TELL_PRIVATE_MSG) {
+							/**
+							 * case 01: record of the sender is already created --> append chat content
+							 * case 02: record is not created, since i never talk with the sender before --> create --> append chat content
+							 */
+							WSMTellPrivateMsg msgTellPrivateMsg = (WSMTellPrivateMsg) msg;
+							int found = searchUser(msgTellPrivateMsg.name, listUserData);
+							if (found == -1) {
+								return;
+							}
+							
+							found = searchPrivateChatRecord(msgTellPrivateMsg.name);
+							PrivateChatRecord record = null;
+							if (found == -1) {
+								//case 02
+								addPrivateChatRecord(msgTellPrivateMsg.name);
+								found = searchPrivateChatRecord(msgTellPrivateMsg.name);	
+							}
+							
+							record = listPrivateChat.get(found);
+							record.addChat(msgTellPrivateMsg.chatContent, false);
+							
 							displayUI();
 						}
 
@@ -419,6 +447,7 @@ public class Controller {
 		listJoinedRoomNames.clear();
 		listUserData.clear();
 		listRoomData.clear();
+		listPrivateChat.clear();
 		currChatTargetName = null;
 
 		// kill msg-receiver thread
@@ -634,7 +663,7 @@ public class Controller {
 	}
 
 	/**
-	 * Double click on an username on the ALL USERs list to create a private chat
+	 * Double click on an user name on the ALL USERs list to create a private chat
 	 */
 	public void onListUser_Click(MouseEvent event) {
 		if (event.getClickCount() == 2) {
@@ -642,6 +671,8 @@ public class Controller {
 
 			currChatTargetName = listUserData.get(index).UserName;
 			privateChat = true;
+			
+			addPrivateChatRecord(currChatTargetName);
 
 			displayUI();
 		}
@@ -653,9 +684,13 @@ public class Controller {
 	 * 
 	 * @param event
 	 */
-	public void new_room(ActionEvent event) {
-		String new_Room = txtNewRoom.getText();
-		WSMJoinRoom room = new WSMJoinRoom(new_Room);
+	public void onBtnCreate_Click(ActionEvent event) {
+		String roomName = txtNewRoom.getText();
+		if (roomName.isEmpty()) {
+			return;
+		}
+		
+		WSMJoinRoom room = new WSMJoinRoom(roomName);
 		send2Server(room);
 		txtNewRoom.clear();
 
@@ -775,14 +810,17 @@ public class Controller {
 		if (found == -1) {
 			return;
 		}
+		found = searchPrivateChatRecord(currChatTargetName);
+		if (found == -1) {
+			return;
+		}
 
 		// chat section
-		User user = listUserData.get(found);
-		String[] chatHistory = user.displayPrivateChat();
-		lbChatWindow.setText(user.UserName);
+		PrivateChatRecord record = listPrivateChat.get(found);
+		lbChatWindow.setText(currChatTargetName);
 		txtChatWindow.clear();
-		for (int i = 0; i < chatHistory.length; ++i) {
-			txtChatWindow.appendText(chatHistory[i] + "\n");
+		for (String line : record.listChatLines) {
+			txtChatWindow.appendText(line + "\n");
 		}
 
 		// tab section
@@ -848,11 +886,15 @@ public class Controller {
 	 * @param event
 	 */
 	public void onBtnSendChat_Click(ActionEvent event) {
+		
 		if (currChatTargetName == null) {
 			return;
 		}
 
 		String chat = txtChat.getText();
+		if (chat.isEmpty()) {
+			return;
+		}
 
 		if (privateChat == false) {
 			// ROOM
@@ -867,6 +909,17 @@ public class Controller {
 
 		} else {
 			// PRIVATE
+			int found = searchPrivateChatRecord(currChatTargetName);
+			if (found == -1) {
+				return;
+			}
+			listPrivateChat.get(found).addChat(chat, true);
+			
+			WSMSendPrivateMsg msg = new WSMSendPrivateMsg(currChatTargetName, chat);
+			send2Server(msg);
+			
+			//// show the message I send to the other user
+			displayUI();
 		}
 
 		txtChat.clear();
@@ -976,4 +1029,52 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Search for the given user name in the record-list
+	 * @param userName
+	 * @return
+	 */
+	public int searchPrivateChatRecord(String userName) {
+		for (int i = 0; i < listPrivateChat.size(); i++) {
+			if (listPrivateChat.get(i).userName.equals(userName)) {
+				return i;
+			}
+		}
+		
+		return -1;
+	}
+	
+	/**
+	 * Try to add new private chat record if not existed
+	 */
+	public boolean addPrivateChatRecord(String userName) {
+		int found = searchUser(userName, listUserData);
+		if (found == -1) {
+			return false;
+		}
+		
+		found = searchPrivateChatRecord(userName);
+		if (found >= 0) {
+			return false;
+		}
+		
+		listPrivateChat.add(new PrivateChatRecord(userName));
+		return true;
+	}
+	
+	/**
+	 * Remove the given user name's record out of the record-list
+	 * @param userName
+	 * @return
+	 */
+	public boolean removePrivateChatRecord(String userName) {
+		for (int i = 0; i < listPrivateChat.size(); i++) {
+			if (listPrivateChat.get(i).userName.equals(userName)) {
+				listPrivateChat.remove(i);
+				return true;
+			}
+		}
+		
+		return false;
+	}
 }

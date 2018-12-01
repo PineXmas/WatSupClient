@@ -29,7 +29,7 @@
 			</textFill>
 		</Label>
 		<Button fx:id="btnNewRoom" layoutX="16.0" layoutY="582.0"
-			mnemonicParsing="false" onAction="#new_room" text="Create" />
+			mnemonicParsing="false" onAction="#onBtnCreate_Click" text="Create" />
 		<TextField fx:id="txtNewRoom" layoutX="16.0" layoutY="542.0"
 			prefHeight="27.0" prefWidth="172.0" />
 		<Label fx:id="titlenewRoom" layoutX="30.0" layoutY="517.0"
