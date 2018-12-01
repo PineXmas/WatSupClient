@@ -47,7 +47,7 @@ import sun.util.xml.PlatformXmlPropertiesProvider;
 
 public class Controller {
 	String serverHost = "localhost";
-	int portNumber = 8312;
+	int portNumber = WSSettings._DEFAULT_PORT;
 
 	// TODO wrap currDisplayRoomIndex & privateChat to a function, let say
 	// setChatHistoryTarget: Room, Private, None
@@ -71,6 +71,8 @@ public class Controller {
 
 	public TextField txtUserName;
 	public TextField txtNewRoom;
+	public TextField txtHostAddress;
+	public TextField txtPortNumber;
 
 	public TextArea txtChat;
 	public TextArea txtChatWindow;
@@ -562,7 +564,22 @@ public class Controller {
 				// connect to server
 				clientSocket = new Socket();
 
+				//get custom host address & port number
+				if (!txtPortNumber.getText().isEmpty()) {
+					try {
+						portNumber = Integer.valueOf(txtPortNumber.getText());
+					} catch (Exception e) {
+						ErrandBoy.printlnError(e, "Error while parsing port number, use default port " + WSSettings._DEFAULT_PORT);
+						portNumber = WSSettings._DEFAULT_PORT;
+					}
+				}
+				if (!txtHostAddress.getText().isEmpty()) {
+					serverHost = txtHostAddress.getText();
+				}
+				hostAddress = new InetSocketAddress(serverHost, portNumber);
+				
 				// this functions will block until server is reached
+				ErrandBoy.println("Connecting to server at " + serverHost + ":" + portNumber);
 				clientSocket.connect(hostAddress);
 
 				// start serverListener & msgReceiver
