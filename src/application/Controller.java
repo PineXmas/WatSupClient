@@ -1,35 +1,20 @@
 package application;
 
-import java.awt.Component;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.ResourceBundle;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import javax.print.DocFlavor.STRING;
-import javax.swing.JOptionPane;
-
-import org.omg.CosNaming.NamingContextExtPackage.AddressHelper;
-
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.beans.binding.ListBinding;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -43,10 +28,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import sun.util.xml.PlatformXmlPropertiesProvider;
 
 public class Controller {
-	String serverHost = "localhost";
+	String serverHost = "35.227.34.15";
 	int portNumber = WSSettings._DEFAULT_PORT;
 
 	// TODO wrap currDisplayRoomIndex & privateChat to a function, let say
