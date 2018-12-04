@@ -87,7 +87,6 @@ public class Controller {
 	 * The job for serverListener-thread
 	 */
 	Runnable runnableServerListener = new Runnable() {
-
 		@Override
 		public void run() {
 			try {
@@ -141,6 +140,20 @@ public class Controller {
 					ErrandBoy.print("Server input is EOF, ");
 				}
 				ErrandBoy.println("Server-listener-thread has stopped");
+				
+				//force client to log-out after server is closed
+				displayErrorMsg("Server has closed connection. Client is logged out!");
+				reset();
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						switch2LogIn();
+					}
+				});
+
+
+				
 			} catch (Exception e) {
 				ErrandBoy.printlnError(e, "Error while reading from client's input stream");
 			} finally {
