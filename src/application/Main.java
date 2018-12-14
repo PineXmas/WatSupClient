@@ -27,10 +27,13 @@ public class Main extends Application {
 			currController = (Controller)chatRoomLoader.getController();
 			currController.currStage = primaryStage;
 			
-			primaryStage.setTitle("Login");
+			primaryStage.setTitle("Welcome to WatSup");
+			primaryStage.setHeight(300);
+			primaryStage.setMaxHeight(700);
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.show();
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

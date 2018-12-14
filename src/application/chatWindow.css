@@ -1,0 +1,123 @@
+
+
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+
+*{
+    -fx-primary : #2A2E37;
+    -fx-secondary : #e8b11a;
+    -fx-primarytext : #B2B2B2;
+    -list-bg-color: #232323
+}
+.tab-pane{
+	-fx-padding: 0 -1 -1 -1;
+	-fx-background-color: #2A2E37;
+	
+}
+.tab-pane *.tab-header-area *.tabl-header-background{
+	-fx-text-fill: #B2B2B2;
+	-fx-background-color: #2A2E37;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+.tab{
+	-fx-pref-width: 67;
+	-fx-pref-height: 27;
+	-fx-border-color: #e8b11a;
+	-fx-background-color: #2A2E37;
+	-fx-border-radius: 18px;
+    -fx-background-radius: 18px;	
+}
+.tab:selected {
+	-fx-background-color: -fx-secondary;
+	-fx-padding: 2px;
+}
+
+.tab:selected .tab-label{
+	/*
+    -fx-text-fill: derive(-fx-secondary, 20%);
+	*/
+	-fx-text-fill: -list-bg-color;    
+}
+.label{
+	-fx-text-fill: -fx-primarytext;
+}
+
+.tab .tab-label{
+	
+	-fx-text-fill: white;
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
+.button{
+    -fx-text-fill: -fx-primarytext;
+    -fx-background-color: -fx-primary;
+    -fx-border-color: -fx-secondary;
+    -fx-border-radius: 18px;
+    -fx-background-radius: 18px;
+    -fx-font-size: 10pt;
+    -fx-font-family: "System";
+
+}
+
+.button:hover, .button:focused{
+    -fx-border-color: -fx-secondary;
+    -fx-text-fill: -fx-primarytext;
+}
+.text-field
+{
+    -fx-text-fill: -fx-primarytext;
+    -fx-font-size : 11pt;
+    -fx-font-family: "System";
+    -fx-focus-color: -fx-secondary;
+    -fx-border-width: 0 0 1px;
+    -fx-border-color: -fx-secondary;
+    -fx-background-color: #2A2E37;  
+}
+.list-view
+{
+	
+    -fx-border-color: -fx-secondary;
+	-fx-background-color: -list-bg-color;
+    -fx-focus-color: -fx-secondary;
+    -fx-border-radius: 18px;
+    -fx-background-radius: 18px;
+	-fx-padding: 4px;
+}
+.list-view .list-cell:hover {
+    -fx-background-color: -fx-secondary;
+}
+.list-view .list-cell:selected {
+    -fx-background-color: -fx-secondary;
+    -fx-background-radius: 18px;
+    -fx-border-radius: 18px;
+    -fx-text-fill: white;
+}
+.list-view .list-cell {
+    -fx-background-color: -list-bg-color;
+    -fx-text-fill: white;
+    -fx-background-radius: 60px;
+    -fx-border-radius: 60px;
+}
+
+.text-area  {
+	-fx-text-fill: black;
+	-fx-border-color: -fx-secondary;
+	-fx-background-color: #2A2E37;
+	-fx-border-radius: 15px;
+	-fx-background-radius: 15px;
+	-fx-padding: 4px;
+	-fx-cursor: default;
+}
+
+
+
+
+
+
+
+

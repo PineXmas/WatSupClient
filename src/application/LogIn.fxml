@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -7,36 +9,27 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="245.0" prefWidth="313.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="245.0" prefWidth="313.0" stylesheets="application/signIn.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<Button fx:id="btnSignIn" layoutX="106.0" layoutY="173.0" mnemonicParsing="false" onAction="#onBtnSignIn_Click" prefHeight="9.0" prefWidth="102.0" text="Log In">
+		<Button fx:id="btnSignIn" layoutX="106.0" layoutY="173.0" mnemonicParsing="false" onAction="#onBtnSignIn_Click" prefHeight="9.0" prefWidth="102.0" text="Sign In" />
+		<TextField fx:id="txtUserName" alignment="CENTER" layoutX="75.0" layoutY="123.0" prefHeight="25.0" prefWidth="163.0" promptText="Enter Your Username" />
+		<Label contentDisplay="CENTER" layoutX="85.0" layoutY="41.0" text="WATSUP" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
 			<font>
-				<Font name="Avenir Next Demi Bold" size="13.0" />
+				<Font name="Georgia Bold" size="30.0" />
 			</font>
-			<textFill>
-				<LinearGradient cycleMethod="REPEAT" endX="1.0" endY="1.0">
-					<stops>
-						<Stop color="#1e1d09" />
-						<Stop color="#1194ab" offset="1.0" />
-					</stops>
-				</LinearGradient>
-			</textFill>
-		</Button>
-		<TextField fx:id="txtUserName" layoutX="75.0" layoutY="135.0" prefHeight="25.0" prefWidth="163.0" promptText="Enter Your Username" />
-		<Label layoutX="92.0" layoutY="54.0" text="WATSUP">
-			<font>
-				<Font name="Times New Roman Bold" size="30.0" />
-			</font>
-			<textFill>
-				<LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0">
-					<stops>
-						<Stop color="#1e1d09" />
-						<Stop color="#24cdeb" offset="1.0" />
-					</stops>
-				</LinearGradient>
-			</textFill>
+         <textFill>
+            <RadialGradient centerX="0.5" centerY="0.5" cycleMethod="REFLECT" radius="0.5">
+               <stops>
+                  <Stop color="#1e1d09" />
+                  <Stop color="#e8b11a" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </textFill>
+         <effect>
+            <Reflection />
+         </effect>
 		</Label>
-      <TextField fx:id="txtHostAddress" alignment="CENTER" layoutX="6.0" layoutY="213.0" style="-fx-background-color: #F4F4F4;" />
-      <TextField fx:id="txtPortNumber" alignment="CENTER" layoutX="158.0" layoutY="213.0" style="-fx-background-color: #F4F4F4;" />
+		 <TextField fx:id="txtHostAddress" alignment="CENTER" layoutY="254.0" prefHeight="27.0" prefWidth="92.0" styleClass=".hidden" />
+      <TextField fx:id="txtPortNumber" alignment="CENTER" layoutX="228.0" layoutY="254.0" prefHeight="27.0" prefWidth="85.0" />
 	</children>
 </AnchorPane>

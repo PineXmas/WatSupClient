@@ -1,0 +1,74 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+/* 
+*{
+	-fx-background-color: #2A2E37
+	
+}
+.root{
+	-fx-background-color: #FFFFF;
+}
+ 
+.text-field{
+	-fx-text-box-border: transparent;
+	-fx-background-color: F4D03F;
+	
+}
+
+*/
+
+*{
+	-fx-background-color: #2A2E37;
+    -fx-primary : #2A2E37;
+    -fx-secondary : #e8b11a;
+    -fx-primarytext : #B2B2B2;
+ 
+}
+.root{
+    -fx-background-color: -fx-primary;
+}
+/*
+ * if we have icons
+  */
+.glyph-icon
+{
+    -fx-fill: -fx-primarytext;
+}
+/*
+ Sign in button
+  */
+#txtHostAddres{
+	-fx-text-fill: white;
+	-fx-background-color: white;
+}
+.button{
+    -fx-text-fill: -fx-primarytext;
+    -fx-background-color: -fx-primary;
+    -fx-border-color: -fx-secondary;
+    -fx-border-radius: 18px;
+    -fx-background-radius: 18px;
+    -fx-font-size: 12pt;
+    -fx-font-family: "System";
+
+}
+
+.button:hover, .button:focused{
+    -fx-border-color: -fx-secondary;
+    -fx-text-fill: -fx-primarytext;
+}
+
+.text-field
+{
+    -fx-text-fill: -fx-primarytext;
+    -fx-font-size : 10.5pt;
+    -fx-font-family: "System";
+    -fx-focus-color: -fx-secondary;
+    -fx-text-fill: derive(-fx-secondary, 20%);
+    -fx-border-width: 0 0 1px;
+    -fx-border-color: -fx-secondary;
+  
+}
+
+.hidden
+{
+	-fx-border-color: -fx-;
+}

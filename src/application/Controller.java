@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import javax.swing.text.Document;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,10 +29,11 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BackgroundRepeat;
 import javafx.stage.Stage;
 
 public class Controller {
-	String serverHost = "35.227.34.15";
+	String serverHost = "localhost";
 	int portNumber = WSSettings._DEFAULT_PORT;
 
 	// TODO wrap currDisplayRoomIndex & privateChat to a function, let say
@@ -87,6 +90,7 @@ public class Controller {
 	 * The job for serverListener-thread
 	 */
 	Runnable runnableServerListener = new Runnable() {
+
 		@Override
 		public void run() {
 			try {
@@ -140,20 +144,6 @@ public class Controller {
 					ErrandBoy.print("Server input is EOF, ");
 				}
 				ErrandBoy.println("Server-listener-thread has stopped");
-				
-				//force client to log-out after server is closed
-				displayErrorMsg("Server has closed connection. Client is logged out!");
-				reset();
-				Platform.runLater(new Runnable() {
-
-					@Override
-					public void run() {
-						switch2LogIn();
-					}
-				});
-
-
-				
 			} catch (Exception e) {
 				ErrandBoy.printlnError(e, "Error while reading from client's input stream");
 			} finally {
@@ -629,7 +619,7 @@ public class Controller {
 
 			currStage.setScene(scene);
 			currStage.setTitle(myUserName);
-
+			currStage.setHeight(660);
 			initUI();
 
 			displayUI();
@@ -651,6 +641,7 @@ public class Controller {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Error");
 				alert.setHeaderText(null);
+				
 				alert.setContentText(errorMsg);
 				alert.showAndWait();
 			}
@@ -1039,7 +1030,7 @@ public class Controller {
 
 			currStage.setScene(scene);
 			currStage.setTitle("Log In");
-
+			currStage.setHeight(300);
 			displayUI();
 
 		} catch (IOException e) {
